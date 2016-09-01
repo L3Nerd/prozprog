@@ -4,7 +4,7 @@
  * Machine generated for CPU 'nios2_qsys' in SOPC Builder design 'qsys_prozprog'
  * SOPC Builder design path: D:/100849/qsys_prozprog.sopcinfo
  *
- * Generated: Thu Jul 14 17:09:18 CEST 2016
+ * Generated: Thu Sep 01 16:14:39 CEST 2016
  */
 
 /*
@@ -508,7 +508,7 @@
 #define OS_TMR_CFG_NAME_SIZE 16
 #define OS_TMR_CFG_TICKS_PER_SEC 10
 #define OS_TMR_CFG_WHEEL_SIZE 2
-#define OS_TMR_EN 0
+#define OS_TMR_EN 1
 
 
 /*

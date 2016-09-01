@@ -2,8 +2,8 @@
 <sch:Settings xmlns:sch="http://www.altera.com/embeddedsw/bsp/schema">
         <BspType>ucosii</BspType>
         <BspVersion>default</BspVersion>
-        <BspGeneratedTimeStamp>Jul 14, 2016 5:09:18 PM</BspGeneratedTimeStamp>
-        <BspGeneratedUnixTimeStamp>1468508958009</BspGeneratedUnixTimeStamp>
+        <BspGeneratedTimeStamp>Sep 1, 2016 4:14:39 PM</BspGeneratedTimeStamp>
+        <BspGeneratedUnixTimeStamp>1472739279055</BspGeneratedUnixTimeStamp>
         <BspGeneratedLocation>D:\100849\svn\ueb01\grillfest_bsp</BspGeneratedLocation>
         <BspSettingsFile>settings.bsp</BspSettingsFile>
         <SopcDesignFile>D:\100849\qsys_prozprog.sopcinfo</SopcDesignFile>
@@ -1598,7 +1598,7 @@
                 <SettingName>ucosii.os_tmr_en</SettingName>
                 <Identifier>OS_TMR_EN</Identifier>
                 <Type>Boolean</Type>
-                <Value>0</Value>
+                <Value>1</Value>
                 <DefaultValue>0</DefaultValue>
                 <DestinationFile>system_h_define</DestinationFile>
                 <Description>Enable code for timers</Description>
