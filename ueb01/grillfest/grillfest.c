@@ -36,12 +36,12 @@
 #include "vga/vga_font.h"
 
 /* Konstanten */
-#define MAX_WUERSTE (100)
-#define TICKS_PER_SECOND (10)
-#define ANZAHL_SEITEN (4)
+#define MAX_WUERSTE      100
+#define TICKS_PER_SECOND 10
+#define ANZAHL_SEITEN    4
 
 /* Definition of Task Stacks */
-#define   TASK_STACKSIZE       2048
+#define   TASK_STACKSIZE 2048
 OS_STK    stk_fleischer[TASK_STACKSIZE];
 OS_STK    stk_eingabe[TASK_STACKSIZE];
 OS_STK    stk_grillmeister[TASK_STACKSIZE];
@@ -49,11 +49,11 @@ OS_STK    stk_physik[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
-#define EINGABE_PRIORITY        10
-#define FLEISCHER_PRIORITY      22
-#define GRILLMEISTER_PRIORITY   16
-#define AUSGABE_PRIORITY        25
-#define PHYSIK_PRIORITY        13
+#define EINGABE_PRIORITY      10
+#define PHYSIK_PRIORITY       13
+#define GRILLMEISTER_PRIORITY 16
+#define FLEISCHER_PRIORITY    22
+#define AUSGABE_PRIORITY      25
 
 /* keyboard data queue */
 #define OS_KEYBOARD_Q_SIZE	10
@@ -70,7 +70,8 @@ typedef struct {
 typedef Wurst * wurst_ptr;
 
 typedef struct {
-
+  wurst_ptr wuerste[MAX_WUERSTE];
+  INT8U     anzahl_wuerste;
 } Grill;
 
 /* Wurst Semaphore und Speicher */
@@ -329,6 +330,16 @@ int main(void)
                   EINGABE_PRIORITY,
                   EINGABE_PRIORITY,
                   stk_eingabe,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(task_ausgabe,
+                  NULL,
+                  (void *)&stk_ausgabe[TASK_STACKSIZE-1],
+                  AUSGABE_PRIORITY,
+                  AUSGABE_PRIORITY,
+                  stk_ausgabe,
                   TASK_STACKSIZE,
                   NULL,
                   0);
