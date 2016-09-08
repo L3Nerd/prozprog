@@ -38,12 +38,14 @@
 /* Konstanten */
 #define MAX_WUERSTE (100)
 #define TICKS_PER_SECOND (10)
+#define ANZAHL_SEITEN (4)
 
 /* Definition of Task Stacks */
 #define   TASK_STACKSIZE       2048
 OS_STK    stk_fleischer[TASK_STACKSIZE];
 OS_STK    stk_eingabe[TASK_STACKSIZE];
 OS_STK    stk_grillmeister[TASK_STACKSIZE];
+OS_STK    stk_physik[TASK_STACKSIZE];
 
 /* Definition of Task Priorities */
 
@@ -51,6 +53,7 @@ OS_STK    stk_grillmeister[TASK_STACKSIZE];
 #define FLEISCHER_PRIORITY      22
 #define GRILLMEISTER_PRIORITY   16
 #define AUSGABE_PRIORITY        25
+#define PHYSIK_PRIORITY        13
 
 /* keyboard data queue */
 #define OS_KEYBOARD_Q_SIZE	10
@@ -60,7 +63,8 @@ void *keyQBuf[OS_KEYBOARD_Q_SIZE];
 /* Datenstrukturen */
 
 typedef struct {
-  INT8U seiten[4];
+  INT8U seiten[ANZAHL_SEITEN];
+  INT8U seite;
 } Wurst;
 
 typedef Wurst * wurst_ptr;
@@ -80,6 +84,12 @@ INT8U      WurstPart[MAX_WUERSTE][sizeof(Wurst)];
 OS_EVENT * FleischerBusySema;
 
 BOOLEAN fleischer_busy = true;
+
+/* Grill und Temperatur Semaphore */
+OS_EVENT * GrillSema;
+OS_EVENT * TempSema;
+
+INT8U GrillTemp = 300;
 
 /* Kuehlbox Semaphore und Speicher */
 
@@ -192,6 +202,35 @@ void task_grillmeister(void* pdata)
   }
 }
 
+/* Task: Fuer Physik
+ *
+ * Berechnet den Braeunungsgrad der Wuerste.
+ */
+void task_physik(void* pdata)
+{
+  INT8U err;
+  OS_Q_DATA data;
+  wurst_ptr wurst;
+  INT8U temperatur;
+  INT8U i;
+  while (1)
+  {
+    OSTimeDlyHMSM(0, 0, 5, 0);
+
+    OSSemPend(GrillSema, 0, &err);
+    OSSemPend(TempSema, 0, &err);
+    temperatur = GrillTemp;
+
+    for(i = 0; i < grill_wurst_count; i++) {
+      wurst = Grill[i];
+      wurst.seiten[wurst.seite] += temperatur/20;
+    }
+
+    OSSemPost(TempSema);
+    OSSemPost(GrillSema);
+  }
+}
+
 /*
  * Task: For User input
  *
@@ -240,6 +279,10 @@ int main(void)
   /* Message Queue f�r K�hlbox alloziieren */
   BoxQueue = OSQCreate(&BoxMsg[0], MAX_WUERSTE);
 
+  /* Grill und Temperatur Sema */
+  GrillSema = OSSemCreate(1);
+  TempSema  = OSSemCreate(1);
+
   /* setup ps2 macro and user callback */
   keyQ = OSQCreate(&keyQBuf[0], OS_KEYBOARD_Q_SIZE);
   ps2_init();
@@ -266,6 +309,16 @@ int main(void)
                   GRILLMEISTER_PRIORITY,
                   GRILLMEISTER_PRIORITY,
                   stk_grillmeister,
+                  TASK_STACKSIZE,
+                  NULL,
+                  0);
+
+  OSTaskCreateExt(task_physik,
+                  NULL,
+                  (void *)&stk_physik[TASK_STACKSIZE-1],
+                  PHYSIK_PRIORITY,
+                  PHYSIK_PRIORITY,
+                  stk_physik,
                   TASK_STACKSIZE,
                   NULL,
                   0);
