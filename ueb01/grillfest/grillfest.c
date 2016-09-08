@@ -4,7 +4,7 @@
 * subject to the License Agreement located at the end of this file below.*
 **************************************************************************
 * Description:                                                           *
-* The following is a simple hello world program running MicroC/OS-II.The * 
+* The following is a simple hello world program running MicroC/OS-II.The *
 * purpose of the design is to be a very simple application that just     *
 * demonstrates MicroC/OS-II running on NIOS II.The design doesn't account*
 * for issues such as checking system call return codes. etc.             *
@@ -146,7 +146,7 @@ wurst_ptr create_wurst()
   return wurst;
 }
 
-/* Fleischer: erzeugt Würste */
+/* Fleischer: erzeugt Wï¿½rste */
 void task_fleischer(void* pdata)
 {
   INT8U err;
@@ -166,11 +166,11 @@ void task_fleischer(void* pdata)
 
     /* Temp Ausgabe */
     OSQQuery(BoxQueue, &data);
-    printf("[F]Anzahl Würste: %i\n", data.OSNMsgs);
+    printf("[F]Anzahl Wï¿½rste: %i\n", data.OSNMsgs);
   }
 }
 
-/* Grillmeister: brät Würste */
+/* Grillmeister: brï¿½t Wï¿½rste */
 void task_grillmeister(void* pdata)
 {
   INT8U err;
@@ -186,7 +186,7 @@ void task_grillmeister(void* pdata)
     OSQQuery(BoxQueue, &data);
     if (data.OSNMsgs <= 0)
       OSTmrStart(box_timer, &err);
-    printf("[G]Anzahl Würste: %i\n", data.OSNMsgs);
+    printf("[G]Anzahl Wï¿½rste: %i\n", data.OSNMsgs);
 
     /*OSSemPost(FleischerBusySema);*/
   }
@@ -230,14 +230,14 @@ int main(void)
 {
   INT8U err;
 
-  /* Partition und Semaphore für Würste alloziieren */
+  /* Partition und Semaphore fï¿½r Wï¿½rste alloziieren */
   WurstSema = OSSemCreate(1);
   WurstBuff = OSMemCreate(WurstPart, MAX_WUERSTE, sizeof(Wurst), &err);
 
-  /* Semaphore für FleischerTrinkt alloziieren */
+  /* Semaphore fï¿½r FleischerTrinkt alloziieren */
   FleischerBusySema = OSSemCreate(0);
 
-  /* Message Queue für Kühlbox alloziieren */
+  /* Message Queue fï¿½r Kï¿½hlbox alloziieren */
   BoxQueue = OSQCreate(&BoxMsg[0], MAX_WUERSTE);
 
   /* setup ps2 macro and user callback */
@@ -269,7 +269,7 @@ int main(void)
                   TASK_STACKSIZE,
                   NULL,
                   0);
-               
+
   OSTaskCreateExt(task_eingabe,
                   NULL,
                   (void *)&stk_eingabe[TASK_STACKSIZE-1],
@@ -282,34 +282,3 @@ int main(void)
   OSStart();
   return 0;
 }
-
-/******************************************************************************
-*                                                                             *
-* License Agreement                                                           *
-*                                                                             *
-* Copyright (c) 2004 Altera Corporation, San Jose, California, USA.           *
-* All rights reserved.                                                        *
-*                                                                             *
-* Permission is hereby granted, free of charge, to any person obtaining a     *
-* copy of this software and associated documentation files (the "Software"),  *
-* to deal in the Software without restriction, including without limitation   *
-* the rights to use, copy, modify, merge, publish, distribute, sublicense,    *
-* and/or sell copies of the Software, and to permit persons to whom the       *
-* Software is furnished to do so, subject to the following conditions:        *
-*                                                                             *
-* The above copyright notice and this permission notice shall be included in  *
-* all copies or substantial portions of the Software.                         *
-*                                                                             *
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  *
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,    *
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE *
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER      *
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING     *
-* FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER         *
-* DEALINGS IN THE SOFTWARE.                                                   *
-*                                                                             *
-* This agreement shall be governed in all respects by the laws of the State   *
-* of California and by the laws of the United States of America.              *
-* Altera does not recommend, suggest or require that this reference design    *
-* file be used in conjunction or combination with any other product.          *
-******************************************************************************/
