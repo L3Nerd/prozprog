@@ -112,7 +112,7 @@ void toggle_fleischer_busy() {
   Fleischer_busy = !Fleischer_busy;
 }
 
-void toggle_Grillmeister_trinkt() {
+void toggle_grillmeister_trinkt() {
   INT8U err;
   if (Grillmeister_trinkt)
     OSSemPost(GrillmeisterTrinktSema);
@@ -337,7 +337,7 @@ void task_eingabe(void* pdata) {
           OSSemPost(PlaceWurstSema);
         }
         else if (c == 'g' || c == 'G') {
-          toggle_Grillmeister_trinkt();
+          toggle_grillmeister_trinkt();
         }
         else if (c == '+')
           increase_temperatur();
