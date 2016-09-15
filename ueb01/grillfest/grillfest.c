@@ -151,13 +151,19 @@ void delete_msg(msg_ptr msg) {
 }
 
 void send_fleischer_msg(MsgTypes msg_type) {
+  INT8U err;
   msg_ptr msg = create_msg(msg_type);
-  OSMboxPost(FleischerMsgBox, msg);
+  err = OSMboxPost(FleischerMsgBox, msg);
+  if (err != OS_ERR_NONE)
+    delete_msg(msg);
 }
 
 void send_grillmeister_msg(MsgTypes msg_type) {
+  INT8U err;
   msg_ptr msg = create_msg(msg_type);
-  OSMboxPost(GrillmeisterMsgBox, msg);
+  err = OSMboxPost(GrillmeisterMsgBox, msg);
+  if (err != OS_ERR_NONE)
+    delete_msg(msg);
 }
 
 /* Callback fuer die Kuehlbox. */
@@ -496,20 +502,20 @@ void task_ausgabe(void* pdata) {
             color = 252;
           } else
           if ((INT16U) grill.wuerste[i]->seiten[j] >= 80){
-            color = 124;
+            color = 28;
           } else
           if ((INT16U) grill.wuerste[i]->seiten[j] >= 100){
-            color = 236;
+            color = 224;
           }
         } else {
           if ((INT16U) grill.wuerste[i]->seiten[j] < 80) {
             color = 144;
           } else
           if ((INT16U) grill.wuerste[i]->seiten[j] >= 80){
-            color = 80;
+            color = 16;
           } else
           if ((INT16U) grill.wuerste[i]->seiten[j] >= 100){
-            color = 136;
+            color = 128;
           }
         }
         vga_quad(px, py, qx, qy, true, color);
@@ -547,7 +553,7 @@ int main(void)
   /* Message Queue fuer Kuehlbox alloziieren */
   BoxQueue = OSQCreate(&BoxMsg[0], MAX_WUERSTE);
 
-  /* Grill und Temperatur Sema */
+  /* Grill Semaphore */
   GrillSema = OSSemCreate(1);
 
   /* setup ps2 macro and user callback */
