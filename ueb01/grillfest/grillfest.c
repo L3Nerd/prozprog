@@ -64,7 +64,7 @@ BOOLEAN Fleischer_busy = true;
 /* Grillmeister Semaphoren */
 OS_EVENT * GrillmeisterTrinktSema;
 OS_EVENT * PlaceWurstSema;
-BOOLEAN    grillmeister_trinkt = false;
+BOOLEAN    Grillmeister_trinkt = false;
 
 /* Grill und Temperatur Semaphore */
 OS_EVENT * GrillSema;
@@ -112,14 +112,14 @@ void toggle_fleischer_busy() {
   Fleischer_busy = !Fleischer_busy;
 }
 
-void toggle_grillmeister_trinkt() {
+void toggle_Grillmeister_trinkt() {
   INT8U err;
-  if (grillmeister_trinkt)
+  if (Grillmeister_trinkt)
     OSSemPost(GrillmeisterTrinktSema);
   else
     OSSemPend(GrillmeisterTrinktSema, 0, &err);
 
-  grillmeister_trinkt = !grillmeister_trinkt;
+  Grillmeister_trinkt = !Grillmeister_trinkt;
 }
 
 /* keyboard hook
@@ -337,7 +337,7 @@ void task_eingabe(void* pdata) {
           OSSemPost(PlaceWurstSema);
         }
         else if (c == 'g' || c == 'G') {
-          toggle_grillmeister_trinkt();
+          toggle_Grillmeister_trinkt();
         }
         else if (c == '+')
           increase_temperatur();
