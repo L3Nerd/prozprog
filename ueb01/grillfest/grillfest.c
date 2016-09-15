@@ -305,8 +305,6 @@ void task_physik(void* pdata)
       if (wurst->seiten[wurst->seite] > 100) {
         grill.brennt = true;
       }
-
-      printf("[Physik] %i Seite: %i bei %i %\n", wurst, wurst->seite, wurst->seiten[wurst->seite]);
       i++;
     }
 
@@ -386,7 +384,7 @@ void task_ausgabe(void* pdata) {
   }
 }
 
-/* The main function creates two task and starts multi-tasking */
+/* Starting the whole GRILLFEST */
 int main(void)
 {
   INT8U err;
@@ -415,10 +413,11 @@ int main(void)
   keyQ = OSQCreate(&keyQBuf[0], OS_KEYBOARD_Q_SIZE);
   ps2_init();
   ps2_keyListener(key_cb);
+
+  /* VGA Init */
   vga_dma_init();
 
   /* Timer erstellen und starten. */
-
   box_timer = OSTmrCreate(5 * TICKS_PER_SECOND, 0, OS_TMR_OPT_ONE_SHOT, box_timer_cb, NULL, box_timer_name, &err);
   OSTmrStart(box_timer, &err);
 
