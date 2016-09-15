@@ -250,11 +250,10 @@ void task_grillmeister(void* pdata)
         }
       }
     } else {
+      OSSemPend(GrillSema, 0, &err);
       if (grill.anzahl != 0) {
         /* Random Wurst vom Grill in Zange nehmen. */
-        OSSemPend(GrillSema, 0, &err);
         id    = rand() % grill.anzahl;
-        printf("[Meister] Hat id: %i\n", id);
         wurst = grill.wuerste[id];
         grill_remove(id);
         OSSemPost(GrillSema);
@@ -275,11 +274,11 @@ void task_grillmeister(void* pdata)
         } else {
           OSSemPend(GrillSema, 0, &err);
           grill_add(wurst);
-          OSSemPost(GrillSema);
         }
       } else {
         OSTimeDlyHMSM(0, 0, 0, 500);
       }
+      OSSemPost(GrillSema);
     }
     OSSemPost(GrillmeisterTrinktSema);
   }
