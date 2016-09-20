@@ -1,0 +1,25 @@
+[0] Config.pm:343> INFO - This is Biber 2.5
+[0] Config.pm:346> INFO - Logfile is '_main.blg'
+[88] biber-darwin:290> INFO - === Tue Aug 23, 2016, 12:59:28
+[121] Biber.pm:351> INFO - Reading '_main.bcf'
+[334] Biber.pm:776> INFO - Found 10 citekeys in bib section 0
+[355] Biber.pm:3493> INFO - Processing section 0
+[370] Biber.pm:3657> INFO - Looking for bibtex format file 'literatur.bib' for section 0
+[371] bibtex.pm:1187> INFO - Decoding LaTeX character macros into UTF-8
+[372] bibtex.pm:1048> INFO - Found BibTeX data source 'literatur.bib'
+[376] Utils.pm:149> WARN - Datamodel: Entry 'hadoopBook' (literatur.bib): Invalid format '1. April 2014' of date field 'date' - ignoring
+[378] Utils.pm:149> WARN - Datamodel: Entry 'patternsWeb' (literatur.bib): Invalid format '04.08.2016' of date field 'date' - ignoring
+[384] Utils.pm:149> WARN - Datamodel: Entry 'microsoftDevNet' (literatur.bib): Invalid format '02.08.2016' of date field 'date' - ignoring
+[389] Utils.pm:149> WARN - Datamodel: Entry 'patternsBook' (literatur.bib): Invalid format '21. Oktober 1994' of date field 'date' - ignoring
+[390] Utils.pm:149> WARN - Datamodel: Entry 'dwWeb' (literatur.bib): Invalid format '10.08.2016' of date field 'date' - ignoring
+[393] Utils.pm:149> WARN - Datamodel: Entry 'laravelDoc' (literatur.bib): Invalid format '01.08.2016' of date field 'date' - ignoring
+[394] Utils.pm:149> WARN - Datamodel: Entry 'hadoopWeb1' (literatur.bib): Invalid format '14.08.2016' of date field 'date' - ignoring
+[396] Utils.pm:149> WARN - Datamodel: Entry 'clusterWeb1' (literatur.bib): Invalid format '18.08.2016' of date field 'date' - ignoring
+[397] Utils.pm:149> WARN - Datamodel: Entry 'batchWeb1' (literatur.bib): Invalid format '16.08.2016' of date field 'date' - ignoring
+[426] UCollate.pm:66> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[426] UCollate.pm:66> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[427] Biber.pm:3306> INFO - Sorting list 'nty/global/' of type 'entry' with scheme 'nty' and locale 'de-DE'
+[427] Biber.pm:3310> INFO - No sort tailoring available for locale 'de-DE'
+[440] bbl.pm:526> INFO - Writing '_main.bbl' with encoding 'UTF-8'
+[442] bbl.pm:619> INFO - Output to _main.bbl
+[442] Biber.pm:108> INFO - WARNINGS: 9

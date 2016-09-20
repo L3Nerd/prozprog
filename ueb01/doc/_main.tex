@@ -1,0 +1,51 @@
+\documentclass[12pt, listof=totoc, parskip]{scrbook}
+
+\input{00_praeambel.tex}
+
+\begin{document}
+	
+% Nummerierung auf Römisch setzen
+\pagenumbering{Roman}
+	
+% Titelseite
+\input{01_title.tex}
+
+% Inhaltsverzeichnis
+\begin{singlespace}
+	\tableofcontents
+\end{singlespace}
+
+% Abbildungsverzeichnis
+\listoffigures
+
+%Tabellenverzeichnis
+%\newpage
+%\listoftables
+
+% Abkürzungsverzeichnis
+\phantomsection \addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+\input{02_acronyms.tex}
+
+\cleardoublepage
+
+% Nummerierung auf Arabisch setzen
+\pagenumbering{arabic}
+
+% Nummerierung zurücksetzen
+%\setcounter{chapter}{0} 
+
+% ------------------------------------------------
+% ------------------- Inhalt ---------------------
+% ------------------------------------------------
+
+
+\input{1_einleitung.tex}
+
+\input{2_planung.tex}
+
+\input{3_implementierung.tex}
+
+\input{4_bewertung_fazit.tex}
+
+
+\end{document}

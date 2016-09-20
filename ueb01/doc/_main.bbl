@@ -1,0 +1,148 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.7 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{nty/global/}
+    \entry{hadoopWeb1}{online}{}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labeltitlesource}{title}
+      \field{title}{Apache Software Foundation}
+      \verb{url}
+      \verb http://spark.apache.org/
+      \endverb
+      \warn{\item Datamodel: Entry 'hadoopWeb1' (literatur.bib): Invalid format '14.08.2016' of date field 'date' - ignoring}
+    \endentry
+    \entry{patternsWeb}{online}{}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labeltitlesource}{title}
+      \field{title}{Design Patterns}
+      \verb{url}
+      \verb http://www.philipphauer.de
+      \endverb
+      \warn{\item Datamodel: Entry 'patternsWeb' (literatur.bib): Invalid format '04.08.2016' of date field 'date' - ignoring}
+    \endentry
+    \entry{dwWeb}{online}{}
+      \field{sortinit}{E}
+      \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
+      \field{labeltitlesource}{title}
+      \field{title}{ETL für Business Intelligence und Data Warehousing}
+      \verb{url}
+      \verb https://de.talend.com/solutions/etl-analytics
+      \endverb
+      \warn{\item Datamodel: Entry 'dwWeb' (literatur.bib): Invalid format '10.08.2016' of date field 'date' - ignoring}
+    \endentry
+    \entry{laravelDoc}{online}{}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labeltitlesource}{title}
+      \field{title}{Laravel Documentation}
+      \verb{url}
+      \verb https://laravel.com/docs/
+      \endverb
+      \warn{\item Datamodel: Entry 'laravelDoc' (literatur.bib): Invalid format '01.08.2016' of date field 'date' - ignoring}
+    \endentry
+    \entry{microsoftDevNet}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labeltitlesource}{title}
+      \field{title}{Microsoft Developer Network}
+      \verb{url}
+      \verb https://msdn.microsoft.com/en-us/library/ff649690.aspx
+      \endverb
+      \warn{\item Datamodel: Entry 'microsoftDevNet' (literatur.bib): Invalid format '02.08.2016' of date field 'date' - ignoring}
+    \endentry
+    \entry{dwBook}{book}{}
+      \name{author}{1}{}{%
+        {{hash=ca75b9583889ca11e14a2d46bff0c9ad}{%
+           prefix={und},
+           prefix_i={u\bibinitperiod},
+           family={Robert\bibnamedelima Winter},
+           family_i={R\bibinitperiod\bibinitdelim W\bibinitperiod},
+           given={Reinhard\bibnamedelima Jung},
+           given_i={R\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{ca75b9583889ca11e14a2d46bff0c9ad}
+      \strng{fullhash}{ca75b9583889ca11e14a2d46bff0c9ad}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Data Warehousing Strategie: Erfahrungen, Methoden, Visionen}
+      \field{year}{2000}
+    \endentry
+    \entry{batchWeb1}{online}{}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labeltitlesource}{title}
+      \field{title}{[Stapelverarbeitung] BOS (batch operation system)}
+      \verb{url}
+      \verb http://www.itwissen.info/Stapelverarbeitung-BOS-batch-operating-system.html
+      \endverb
+      \warn{\item Datamodel: Entry 'batchWeb1' (literatur.bib): Invalid format '16.08.2016' of date field 'date' - ignoring}
+    \endentry
+    \entry{patternsBook}{book}{}
+      \name{author}{1}{}{%
+        {{hash=94d1f61d5ce60a7bbd7adbe9f970a654}{%
+           family={Vlissides},
+           family_i={V\bibinitperiod},
+           given={Erich\bibnamedelimb Gamma;\bibnamedelimb Ralph\bibnamedelimb Johnson;\bibnamedelimb Richard\bibnamedelimb Helm;\bibnamedelima John},
+           given_i={E\bibinitperiod\bibinitdelim G\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim R\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{94d1f61d5ce60a7bbd7adbe9f970a654}
+      \strng{fullhash}{94d1f61d5ce60a7bbd7adbe9f970a654}
+      \field{sortinit}{V}
+      \field{sortinithash}{d18f5ce25ce0b5ca7f924e3f6c04870e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Entwurfsmuster}
+      \warn{\item Datamodel: Entry 'patternsBook' (literatur.bib): Invalid format '21. Oktober 1994' of date field 'date' - ignoring}
+    \endentry
+    \entry{clusterWeb1}{online}{}
+      \field{sortinit}{W}
+      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
+      \field{labeltitlesource}{title}
+      \field{title}{Was ist Cluster Computing?}
+      \verb{url}
+      \verb http://clouduser.de/grundlagen/was-ist-cluster-computing-158
+      \endverb
+      \warn{\item Datamodel: Entry 'clusterWeb1' (literatur.bib): Invalid format '18.08.2016' of date field 'date' - ignoring}
+    \endentry
+    \entry{hadoopBook}{book}{}
+      \name{author}{1}{}{%
+        {{hash=fec0f7585932951edb687003842f3da9}{%
+           family={White},
+           family_i={W\bibinitperiod},
+           given={Tom},
+           given_i={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{fec0f7585932951edb687003842f3da9}
+      \strng{fullhash}{fec0f7585932951edb687003842f3da9}
+      \field{sortinit}{W}
+      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Hadoop: The Definitve Guide}
+      \warn{\item Datamodel: Entry 'hadoopBook' (literatur.bib): Invalid format '1. April 2014' of date field 'date' - ignoring}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+
