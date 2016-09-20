@@ -147,6 +147,16 @@ C_SRCS += ps2/ps2.c
 C_SRCS += ps2/ps2_keyscan.c
 C_SRCS += vga/vga.c
 C_SRCS += vga/vga_font.c
+C_SRCS += fleischer.c
+C_SRCS += msg_helper.c
+C_SRCS += box.c
+C_SRCS += grillmeister.c
+C_SRCS += grill.c
+C_SRCS += wurst_helper.c
+C_SRCS += physik.c
+C_SRCS += feuerwehr.c
+C_SRCS += eingabe.c
+C_SRCS += ausgabe.c
 CXX_SRCS :=
 ASM_SRCS :=
 
