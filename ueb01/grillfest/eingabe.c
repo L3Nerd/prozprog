@@ -9,6 +9,7 @@
 /* System-Header einbinden */
 
 #include "includes.h"
+#include <stdio.h>
 
 /* Lokale Header einbinden */
 
@@ -39,7 +40,7 @@ void     *keyQBuf[OS_KEYBOARD_Q_SIZE];
 void key_cb (uint8_t key);
 void task_eingabe (void* pdata);
 
-/* Öffentliche Funktionen */
+/* ï¿½ffentliche Funktionen */
 /** @publicsection */
 
 /**

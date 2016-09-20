@@ -28,7 +28,7 @@
 OS_EVENT *GrillSema;
 Grill     grill;
 
-/* Öffentliche Funktionen */
+/* ï¿½ffentliche Funktionen */
 /** @publicsection */
 
 /**
@@ -95,7 +95,6 @@ void grill_remove_all_free (void)
  */
 void grill_increase_temperatur (void)
 {
-  INT8U err;
   if (grill.temperatur + TEMP_INC <= TEMP_MAX)
     grill.temperatur += TEMP_INC;
 }
@@ -105,7 +104,6 @@ void grill_increase_temperatur (void)
  */
 void grill_decrease_temperatur (void)
 {
-  INT8U err;
   if (grill.temperatur - TEMP_INC >= TEMP_MIN)
     grill.temperatur -= TEMP_INC;
 }
@@ -167,7 +165,7 @@ void grill_set_brennt (BOOLEAN brennt)
 void grill_reset (void)
 {
   grill_remove_all_free();
-  grill.brennt     = false;
+  grill.brennt     = OS_FALSE;
   grill.temperatur = TEMP_INIT;
 }
 

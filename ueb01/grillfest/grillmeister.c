@@ -9,6 +9,7 @@
 /* System-Header einbinden */
 
 #include "includes.h"
+#include <stdlib.h>
 
 /* Lokale Header einbinden */
 
@@ -32,7 +33,7 @@ OS_EVENT *GrillmeisterMsgBox;
 
 void task_grillmeister (void* pdata);
 
-/* Öffentliche Funktionen */
+/* ï¿½ffentliche Funktionen */
 /** @publicsection */
 
 /**
@@ -76,7 +77,7 @@ void init_grillmeister (void)
  * Task: Grillmeister
  *
  * Der Grillmeister platziert auf Anforderung durch den Benutzer jeweils eine Wurst aus
- * der Kuehlbox auf dem Grill. Hierfuer benötigt er 5 Sekunden.
+ * der Kuehlbox auf dem Grill. Hierfuer benï¿½tigt er 5 Sekunden.
  *
  * Wenn der Grillmeister nichts anderes zu tun hat, kontrolliert er eine zufaellig
  * ausgewaehlte Wurst auf ihren Braeunungsgrad. Ist diese Wurst von der Unterseite

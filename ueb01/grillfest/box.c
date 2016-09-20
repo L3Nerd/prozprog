@@ -28,14 +28,12 @@
 OS_EVENT * BoxQueue;
 void     * BoxMsg[MAX_BOX_COUNT];
 OS_TMR   * box_timer;
-char     * box_timer_name = "box_timer";
-
 
 /* Forwarddeklarationen */
 
 void box_timer_cb (void *ptmr, void *callback_arg);
 
-/* Öffentliche Funktionen */
+/* Oeffentliche Funktionen */
 /** @publicsection */
 
 /**
@@ -67,7 +65,7 @@ void box_add (wurst_ptr wurst)
  * Entfernt eine Wurst aus Kuehlbox (MsgQueue) und startet den "Leere-Box"-Timer,
  * falls keine Wurst mehr verblieben ist.
  *
- * @returns Wurst-Pointer, falls keine in der Box ist wurd NULL zurück gegeben.
+ * @returns Wurst-Pointer, falls keine in der Box ist wurd NULL zurï¿½ck gegeben.
  */
 wurst_ptr box_take (void)
 {
@@ -96,7 +94,7 @@ void init_box (void)
   BoxQueue = OSQCreate(&BoxMsg[0], MAX_BOX_COUNT);
 
   /* Timer erstellen und starten. */
-  box_timer = OSTmrCreate(60 * TICKS_PER_SECOND, 0, OS_TMR_OPT_ONE_SHOT, box_timer_cb, NULL, box_timer_name, &err);
+  box_timer = OSTmrCreate(60 * TICKS_PER_SECOND, 0, OS_TMR_OPT_ONE_SHOT, box_timer_cb, NULL, (INT8U *)"box_timer", &err);
   OSTmrStart(box_timer, &err);
 }
 

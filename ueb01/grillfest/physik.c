@@ -29,7 +29,7 @@ OS_STK stk_physik[TASK_STACKSIZE];
 
 void task_physik (void* pdata);
 
-/* Öffentliche Funktionen */
+/* ï¿½ffentliche Funktionen */
 /** @publicsection */
 
 /**
@@ -54,9 +54,9 @@ void init_physik (void)
 /**
  * Task: Physik
  *
- * Die Physik sorgt dafuer, dass alle Würste von der Unterseite gleichmaessig gebräunt
+ * Die Physik sorgt dafuer, dass alle Wï¿½rste von der Unterseite gleichmaessig gebrï¿½unt
  * werden. Die Geschwindigkeit der Braeunung haengt dabei von der durch den Benutzer
- * eingestellten Temperatur ab. Außerdem wird der Grill entzuendet, sobald eine Wurst
+ * eingestellten Temperatur ab. Auï¿½erdem wird der Grill entzuendet, sobald eine Wurst
  * den Braeunungsgrad von 100% ueberschreitet.
  *
  * Ressourcen: Grill -> un/lock
@@ -64,7 +64,6 @@ void init_physik (void)
  */
 void task_physik(void* pdata)
 {
-  INT8U     err;
   wurst_ptr wurst;
   INT8U     i;
 
@@ -78,7 +77,7 @@ void task_physik(void* pdata)
       wurst = grill_get_wurst(i);
       wurst->seiten[wurst->seite] += grill_get_temperatur()/100;
       if (wurst->seiten[wurst->seite] > 100) {
-        grill_set_brennt(true);
+        grill_set_brennt(OS_TRUE);
       }
       i++;
     }

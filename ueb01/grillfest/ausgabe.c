@@ -40,7 +40,7 @@ OS_STK stk_ausgabe[TASK_STACKSIZE];
 
 void task_ausgabe (void* pdata);
 
-/* Öffentliche Funktionen */
+/* ï¿½ffentliche Funktionen */
 /** @publicsection */
 
 /**
@@ -75,7 +75,6 @@ void init_ausgabe()
  */
 void task_ausgabe(void* pdata) {
   char        tmp_str[50];
-  INT8U       err;
   INT8U       box_count;
   INT8U       grill_count;
   INT16U      grill_temp;
