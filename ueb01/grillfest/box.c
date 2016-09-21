@@ -8,6 +8,7 @@
 
 /* System-Header einbinden */
 
+#include <stdlib.h>
 #include "includes.h"
 
 /* Lokale Header einbinden */
