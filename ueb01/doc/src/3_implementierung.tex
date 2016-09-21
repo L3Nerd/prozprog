@@ -2,21 +2,106 @@
 
 Das Kapitel Implementierung beinhaltet neben der Darstellung der Abläufe unserer Gruppe während der Realisierung des Konzepts, das aus der Analyse und Planung entstanden ist, noch eine Auflistung der unterschiedlichen Programmtests die bei eben dieser Realisierung hilfreich waren und eine Bedienungsanleitung, um die Steuerungsmöglichkeiten bei der Eingabe des Benutzers zu erläutern.
 
+\section{Datenstrukturen}
+
+\subsection{Wurst}
+
+Eine Wurst besteht aus 4 Seiten die jeweils einen (float) Bränungsgrad haben und einer Seite auf der sie sich gerade befindet.
+
+Die Würste wurden als struct implementiert, dessen Zeiger zur Verarbeitung in die Kühlbox-Nachrichte-Warteschlange bzw. in die Grill-Datenstruktur gegeben wird.
+
+\begin{lstlisting}
+  /* Wurst Datenstruktur */
+  typedef struct {
+    float seiten[4];
+    INT8U seite;
+  } Wurst;
+
+  typedef Wurst *wurst_ptr;
+\end{lstlisting}
+
+Der Speicher für die Würste wird über µC/OS-II Partitionen dynamisch alloziiert.
+
+\begin{lstlisting}
+  wurst = OSMemGet(WurstBuff, &err);
+
+  /* Wurst Seiten initialisieren. */
+  wurst->seiten[0] = 0;
+  wurst->seiten[1] = 0;
+  wurst->seiten[2] = 0;
+  wurst->seiten[3] = 0;
+  wurst->seite     = 0;
+\end{lstlisting}
+
+\subsection{Nachrichten}
+
+Nachrichten an den Fleischer und Grillmeister werden durch ENUMs realisiert, derren Pointer in die jeweilige Nachrichtenbox gegeben werden.
+
+\begin{lstlisting}
+/* Nachrichtentypen */
+typedef enum {
+  START_TRINKEN = 1,
+  STOP_TRINKEN  = 2,
+  PLACE_WURST   = 3,
+  CREATE_WURST  = 4
+} MsgTypes;
+
+typedef MsgTypes * msg_ptr;
+\end{lstlisting}
+
+Der Speicher für die Nachrichten wird über µC/OS-II Partitionen dynamisch alloziiert.
+
+\begin{lstlisting}
+  msg_ptr create_msg (MsgTypes msg_type) {
+    INT8U  err;
+    msg_ptr msg;
+
+    OSSemPend(MsgSema, 0, &err);
+    msg  = OSMemGet(MsgBuff, &err);
+    *msg = msg_type;
+    OSSemPost(MsgSema);
+
+    return msg;
+  }
+\end{lstlisting}
+
+\subsection{Kühlbox}
+
+Die Kühlbox dient dem Zwischenspeichern von Würsten bzw. derren Pointern.
+
+Sie ist indirekt über eine Nachrichtenbox (MsgQ) realisiert.
+
+\subsection{Grill}
+
+Ein Grill besteht aus einer Datenstruktur für Würste, der Anzahl der Würste, der aktuellen Temperatur und dem aktuellen Status (grillt/brennt).
+
+Auch er Grill wurde als struct implementiert, auf ihm wird jedoch nur indirekt über das Grill-Modul und dessen Funktionen gearbeitet.\\
+Der Grill muss über die Modul-Funktionen per Semaphor gesperrt/entsperrt werden.
+
+\begin{lstlisting}
+  typedef struct {
+    wurst_ptr wuerste[MAX_GRILL];
+    INT8U     anzahl;
+    BOOLEAN   brennt;
+    INT16U    temperatur;
+  } Grill;
+\end{lstlisting}
+
 \section{Programmiertagebuch}
 
 Im folgenden Abschnitt sollen die Termine, an denen wir uns als Gruppe im Labor für die Implementierung des Programmcodes für die Hauptaufgabe getroffen haben, einzeln beleuchtet werden und dabei sowohl die Fortschritte als auch unerwartet auftretende Probleme dargestellt werden.\\
 Die Lösung der vorbereitenden Übungsaufgabe wird hier nicht näher beschrieben.
 
-\subsection{Vorarbeiten} 
+\subsection{Vorarbeiten}
 
 Nach der Veranstaltung zur Aufgabenvorführung in der 22. Kalenderwoche wurde sofort die Planung der Abläufe geplant. Da wir beide noch durch verschiedenen andere Übungen beschäftigt waren, einigten wir uns die Bearbeitung nach Beendigung dieser zu beginnen.\\
-Die Übungsaufgabe bearbeiteten wir bereits beim ersten Orientierungstreffen vor der Klausurenphase, bei dem wir uns mit dem DE-Board und den User Manuals vertraut machten und auch die Termine der weiteren Bearbeitung vereinbarten, sowie individuelle theoretische Vorarbeiten für die Zeitraum bis zum ersten Treffen besprachen. 
+Die Übungsaufgabe bearbeiteten wir bereits beim ersten Orientierungstreffen vor der Klausurenphase, bei dem wir uns mit dem DE-Board und den User Manuals vertraut machten und auch die Termine der weiteren Bearbeitung vereinbarten, sowie individuelle theoretische Vorarbeiten für die Zeitraum bis zum ersten Treffen besprachen.
 
 \subsection{Erstes Treffen - 1.9.}
 
 Wir beide hatten uns zuvor bereits unabhängig voneinander Gedanken zur Aufteilung der Tasks und der besten Lösung der Funktionalität durch einen der verschiedenen Kommunikationsdienste gemacht. Beim ersten Treffen brachten wir diese nun zusammen. Zum besseren Verständnis fertigen wir eine Skizze an, welche die Aufgaben der Tasks und deren Kommunikation untereinander darstellen sollte, siehe Kapitel Planung; Abbildung 1.\\
 
-Nachdem wir die letzte theoretische Vorplanung abgeschlossen hatten, begannen wir mit dem praktischen Teil der Implementierung. Zuerst schufen wir die Funktionalität des Fleischers, da es uns sinnvoll erschien in der Reihenfolge des Verlaufs eines Wurstzyklus die Tasks abzuarbeiten. Beim Fleischer traten keine größeren Probleme auf, sodass wir unser Konzept in diesem Bereich nicht anpassen mussten.\\ 
+Nachdem wir die letzte theoretische Vorplanung abgeschlossen hatten, begannen wir mit dem praktischen Teil der Implementierung. Zuerst schufen wir die Funktionalität des Fleischers, da es uns sinnvoll erschien in der Reihenfolge des Verlaufs eines Wurstzyklus die Tasks abzuarbeiten. Beim Fleischer traten keine größeren Probleme auf, sodass wir unser Konzept in diesem Bereich nicht anpassen mussten.\\
 Nachdem der Fleischer implementiert war, testeten wir die Produktion der Würste. Bei diesem Test traten wie vermutet noch keine Fehler auf, weil der Tasks bis jetzt noch alleine arbeiten konnte, und somit über die gesamten Zugriffszeiten auf die Speicher verfügen konnte.\\
 
 Als nächsten begannen wir mit der Realisierung des Grillmeisters, der durch seine vielen verschiedenen Funktionen und Zugriffe sicherlich den umfangreichsten Tasks darstellte, sodass wir diesen am ersten Termin nicht mehr fertig implementierten. Wir schufen lediglich die Funktionalitäten zum entnehmen der Würste aus der Kühlbox und dem Platzieren auf dem Grill, und gingen somit weiterhin chronologisch vor.\\
@@ -56,42 +141,42 @@ Das Programm lief dabei nach einbinden einer fehlenden Bibliothek ohne Probleme.
 Im Folgenden sind Tests dargestellt, die während des gesamten Entwicklungsverlauf durchgeführt wurden:
 
 \begin{array}{lll}
-	\textbf{Test nach...} & \textbf{Erwartetes Ergebnis} & \textbf{tatsächliches Ergebnis} \\ 
-	Analyse & ... & ...\\ 
-	Analyse & ... & ...\\ 
-	Analyse & ... & ...\\ 
-	Analyse & ... & ...\\ 
-	Analyse & ... & ...\\ 
-	Analyse & ... & ...\\ 
-	Analyse & ... & ...\\ 
-\end{array} 
+	\textbf{Test nach...} & \textbf{Erwartetes Ergebnis} & \textbf{tatsächliches Ergebnis} \\
+	Analyse & ... & ...\\
+	Analyse & ... & ...\\
+	Analyse & ... & ...\\
+	Analyse & ... & ...\\
+	Analyse & ... & ...\\
+	Analyse & ... & ...\\
+	Analyse & ... & ...\\
+\end{array}
 
 \section{Aufwandsverteilung}
 
 Die gesamte Aufwandsverteilung verhielt sich in etwa wie folgt:
 
 \begin{array}{ll}
-	\textbf{Entwicklungsphase} & \textbf{~Zeitaufwand in Stunden} \\ 
- 	Analyse & 3 \\ 
- 	Entwurf & 4 \\ 
- 	Implementierung & 18 \\ 
- 	Testen & 5 \\ 
- 	Nacharbeiten & 5 \\ 
+	\textbf{Entwicklungsphase} & \textbf{~Zeitaufwand in Stunden} \\
+ 	Analyse & 3 \\
+ 	Entwurf & 4 \\
+ 	Implementierung & 18 \\
+ 	Testen & 5 \\
+ 	Nacharbeiten & 5 \\
  	Dokumentation & 11
-\end{array} 
+\end{array}
 
 \section{Bedienungsanleitung}
 
 Die Steuerung der Simulation findet komplett über eine Tastatur statt, die an das DE-Board angeschlossen ist. Die Belegung der Tasten mit den verschiedenen Steuerungsmöglichkeiten sind im folgenden dargestellt:\\
 
 \begin{array}{ll}
-	\textbf{Tastenbelegung} & \textbf{Funktion} \\ 
-	d/D & Fleischer zur Produktion veranlassen \\ 
-	h/H & Grillmeister Wurst auflegen lassen \\ 
-	f/F & Fleischer Mineralwasser geben \\ 
-	g/G & Grillmeister Mineralwasser geben \\ 
-	v/V & Fleischer Mineralwasser entziehen \\ 
-	b/B & Grillmeister Mineralwasser entziehen \\ 
-	+ & Grilltemperatur erhoehen \\ 
+	\textbf{Tastenbelegung} & \textbf{Funktion} \\
+	d/D & Fleischer zur Produktion veranlassen \\
+	h/H & Grillmeister Wurst auflegen lassen \\
+	f/F & Fleischer Mineralwasser geben \\
+	g/G & Grillmeister Mineralwasser geben \\
+	v/V & Fleischer Mineralwasser entziehen \\
+	b/B & Grillmeister Mineralwasser entziehen \\
+	+ & Grilltemperatur erhoehen \\
 	- & Grilltemperatur reduzieren
-\end{array} 
+\end{array}

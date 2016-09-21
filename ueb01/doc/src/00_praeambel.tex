@@ -14,8 +14,8 @@
 \usepackage{textcomp}
 
 %Inhaltsverzeichnis
-\setcounter{secnumdepth}{5} 
-\setcounter{tocdepth}{5} 
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
 \usepackage[style=numeric,backend=biber]{biblatex}
 \bibliography{literatur}
 
@@ -25,6 +25,25 @@
 % für Abkürzungen
 \usepackage[printonlyused,withpage]{acronym}
 
+%code snippets
+\usepackage{listings}
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstset{escapechar=@,style=customc}
+
 % für Todos
 \usepackage{todonotes}
 
@@ -33,8 +52,8 @@
 
 % Bilder
 \usepackage{graphicx}
-\usepackage{epsfig} 
-\usepackage{rotating} 
+\usepackage{epsfig}
+\usepackage{rotating}
 \usepackage{subcaption}
 
 % Kopf und Fußzeilen
@@ -52,7 +71,7 @@
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
 {\bfseries\Large}
-{ 
+{
 	%\Huge\textsc{\chaptertitlename}
 	\centering\fontsize{80}{30}\selectfont\color{lightgray}\textbf{\thechapter}
 }

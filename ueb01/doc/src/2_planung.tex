@@ -8,8 +8,8 @@ verschiedenen Prozessen behandelt werden. Diese Prozesse sind teilweise
 physikalischer Natur (z.B. das Bräunen), teilweise handelt es sich auch um „Akteure“
 (Fleischer, Grillmeister und Feuerwehr). Jeder dieser natürlichen Prozesse wird in der
 Simulation auf einen Task abgebildet. Dort, wo die natürlichen Prozesse Informationen
-und Gegenstände austauschen, werden die Tasks entsprechende Daten austauschen.
-Diese Kommunikation zwischen den Tasks ist Kern dieser Aufgabe!
+und Gegenstände austauschen, werden die Tasks entsprechende Daten austauschen. \\
+Diese Kommunikation zwischen den Tasks ist Kern dieser Aufgabe! \\
 Jede Wurst durchläuft während der Simulation mehrere Stationen an denen sie von
 den unterschiedlichen Prozessen behandelt wird. Nach ihrer Erzeugung durch den
 Fleischer liegt die Wurst in einer Kühlbox. Dort verbleibt sie so lange, bis sie durch
@@ -35,7 +35,7 @@ Aus der Problemstellung lassen sich folgende, als Tasks zu modellierende, Progra
 \item Ausgabe (Gibt den Status der Grill-Simulation aus)
 \end{itemize}
 
-Die Prioritäten wurden nach Analyse der Aufgabestellung so angepasst, dass sich die Tasks nicht unnötig blockieren und jeder Task die Chance hat vom Scheduler erfasst zu werden.
+Die Prioritäten wurden nach Analyse der Aufgabestellung so angepasst, dass sich die Tasks nicht unnötig blockieren und jeder Task die Chance hat vom Scheduler erfasst zu werden.\\
 Zudem wurden Ein- und Ausgabe so priorisiert, dass Eingaben schnell erkannt werden und die Ausgabe den Rest der Simulation nicht blockiert.
 
 \subsection{Prozesskommunikation}
@@ -47,11 +47,12 @@ Damit Tasks untereinander Kommunizieren können müssen Kommunikationsdienste ei
 Die Kühlbox soll von dem Fleischer-Task befüllt und von dem Grillmeister-Task geleert werden.
 Hierfür eignet sich eine Nachrichten-Warteschlange, da hier nur Objekte (Würste) rein- und rausgenommen werden
 und keine größeren kritische Abschnitte entstehen.
+
 Im Gegensatz zur Semaphor können in der Warteschlange direkt Objekte hinterlegt werden und eine zusätzliche Datenstruktur kann vermieden werden.
 
 \subsubsection{Grill}
 
-Der Grill wird permanent vom Grillmeister-, Physik und Feuerwehr-Task auf verschiedene Parameter und einzelne Würste abgefragt und verändert.
+Der Grill wird permanent vom Grillmeister-, Physik und Feuerwehr-Task auf verschiedene Parameter und einzelne Würste abgefragt und verändert.\\
 Hier wurde eine durch ein Mutex-Semaphor abgesicherte Datenstruktur geplant, da hier größere kritische Abschnitte,
 wie das sequentielle Bräunen aller Würste, entstehen.
 
