@@ -38,20 +38,6 @@ Aus der Problemstellung lassen sich folgende, als Tasks zu modellierende, Progra
 Die Prioritäten wurden nach Analyse der Aufgabestellung so angepasst, dass sich die Tasks nicht unnötig blockieren und jeder Task die Chance hat vom Scheduler erfasst zu werden.
 Zudem wurden Ein- und Ausgabe so priorisiert, dass Eingaben schnell erkannt werden und die Ausgabe den Rest der Simulation nicht blockiert.
 
-\begin{table}[]
-\centering
-\caption{Prioritäten}
-\label{bla}
-\begin{tabular}{ll}
-Eingabe      & 10 \\
-Physik       & 13 \\
-Grillmeister & 16 \\
-Feuerwehr    & 19 \\
-Fleischer    & 22 \\
-Ausgabe      & 25
-\end{tabular}
-\end{table}
-
 \subsection{Prozesskommunikation}
 
 Damit Tasks untereinander Kommunizieren können müssen Kommunikationsdienste eingerichtet werden, die andere Tasks nicht blockieren und den reibungslosen Ablauf der Simulation gewährleisten.
@@ -80,19 +66,12 @@ die die Komplexität syntaktisch als auch semantisch drastisch erhöht und die E
 Da der Nachrichtenaustausch nur jeweils in Richtung Fleischer- und Grillmeister-Task geschehen muss,
 wurde jeweils eine Nachrichten-Box pro Task angestrebt um so die Nutzereingabe durch versenden von Nachrichten abzubilden.
 
-\subsubsection{Zusammenfassung}
+\subsection{Zusammenfassung}
 
 Nach Analyse der Problemstellung wurde ein Diagramm zur Visualisierung der Prozesskommunikation, inklusive der zu verwendenden Kommunikationsdienste, erstellt.
 
 \begin{figure}[!ht]
-  \caption{IPC}
   \centering
-  \includegraphics[width=0.8\textwidth]{Bilder/diagramm_ipc.png}
+  \includegraphics[width=\textwidth]{Bilder/diagramm_ipc.png}
+  \caption{IPC}
 \end{figure}
-
-\subsection{Datenstrukturen}
-
-Folgende Überlegungen zu Datenstrukturen wurden zu der gegebenen Problemstellung angestrebt.
-
-
-\subsection{Modularisierung}
