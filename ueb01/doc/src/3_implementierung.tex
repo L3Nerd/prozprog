@@ -10,17 +10,79 @@ Die Lösung der vorbereitenden Übungsaufgabe wird hier nicht näher beschrieben
 \subsection{Vorarbeiten} 
 
 Nach der Veranstaltung zur Aufgabenvorführung in der 22. Kalenderwoche wurde sofort die Planung der Abläufe geplant. Da wir beide noch durch verschiedenen andere Übungen beschäftigt waren, einigten wir uns die Bearbeitung nach Beendigung dieser zu beginnen.\\
-Die Übungsaufgabe bearbeiteten wir bereits beim ersten Orientierungstreffen vor der Klausurenphase, bei dem wir auch die Termine der weiteren Bearbeitung vereinbarten, sowie individuelle theoretische Vorarbeiten für die Zeitraum bis zum ersten Treffen. 
+Die Übungsaufgabe bearbeiteten wir bereits beim ersten Orientierungstreffen vor der Klausurenphase, bei dem wir uns mit dem DE-Board und den User Manuals vertraut machten und auch die Termine der weiteren Bearbeitung vereinbarten, sowie individuelle theoretische Vorarbeiten für die Zeitraum bis zum ersten Treffen besprachen. 
 
 \subsection{Erstes Treffen - 1.9.}
 
+Wir beide hatten uns zuvor bereits unabhängig voneinander Gedanken zur Aufteilung der Tasks und der besten Lösung der Funktionalität durch einen der verschiedenen Kommunikationsdienste gemacht. Beim ersten Treffen brachten wir diese nun zusammen. Zum besseren Verständnis fertigen wir eine Skizze an, welche die Aufgaben der Tasks und deren Kommunikation untereinander darstellen sollte, siehe Kapitel Planung; Abbildung 1.\\
+
+Nachdem wir die letzte theoretische Vorplanung abgeschlossen hatten, begannen wir mit dem praktischen Teil der Implementierung. Zuerst schufen wir die Funktionalität des Fleischers, da es uns sinnvoll erschien in der Reihenfolge des Verlaufs eines Wurstzyklus die Tasks abzuarbeiten. Beim Fleischer traten keine größeren Probleme auf, sodass wir unser Konzept in diesem Bereich nicht anpassen mussten.\\ 
+Nachdem der Fleischer implementiert war, testeten wir die Produktion der Würste. Bei diesem Test traten wie vermutet noch keine Fehler auf, weil der Tasks bis jetzt noch alleine arbeiten konnte, und somit über die gesamten Zugriffszeiten auf die Speicher verfügen konnte.\\
+
+Als nächsten begannen wir mit der Realisierung des Grillmeisters, der durch seine vielen verschiedenen Funktionen und Zugriffe sicherlich den umfangreichsten Tasks darstellte, sodass wir diesen am ersten Termin nicht mehr fertig implementierten. Wir schufen lediglich die Funktionalitäten zum entnehmen der Würste aus der Kühlbox und dem Platzieren auf dem Grill, und gingen somit weiterhin chronologisch vor.\\
+Die Eingabe-Benutzerschnittstelle realisierten wir entsprechend der für den aktuellen Task benötigten Eingabemöglichkeiten.
+
 \subsection{Zweites Treffen - 8.9.}
+
+Zu Beginn des zweiten Treffens, testen wir das Zusammenspiel der bisherigen zwei Tasks Fleischer und Grillmeister. Da der Grillmeister eine höhere Priorität als der Fleischer hatte, und somit den Zugriff auf die Kühlbox bei Bedarf übernahm, konnte eine korrekte Funktionalität festgestellt werden.\\
+Danach erweiterten wir den Grillmeister um die Möglichkeit die sich auf dem Grill befindlichen Würste auf ihren Bräunungsgrad hin zu kontrollieren. Da der Grillmeister hierdurch immer noch als einziger Task auf den Grill als Speicher zugriff, funktionierte auch dies ohne größere Komplikationen.\\
+
+Dieser alleinige Zugriff sollte durch das folgende Hinzufügen des Physik-Tasks nun gestört werden. Nachdem die Funktionalität zum Bräunen der Würste implementiert war, testeten wir erneut das Zusammenspiel der verschiedenen Tasks. Wir stellten fest, dass durch die Kombination der von uns gewählten Prioritäten und Delay-Timings keine sinnvolle Abwechslung des Zugriffs auf den Grill durch die Tasks des Grillmeisters und der Physik gegeben war. Entweder kontrollierte der Grillmeister durchgehend, sodass die Physik niemals aktiv werden konnte, oder der Grillmeister bekam nicht genügend Zugriffszeiten, wodurch die Würste auch bei niedriger Temperatur regelmäßig verbrannten. Es waren einige Versuche nötig um den gewünschten Wechsel des Zugriffs der Tasks auf den Grill-Speicher zu realisieren. Wir konnten jedoch bei den von uns im Vorhinein festgelegten Prioritäten bleiben.\\
+
+Nachdem wir mit diesen Speicherzugriffen durch die zwei beschriebenen Tasks bereits kleinere Schwierigkeiten hatten, erwarteten wir, dass diese sich nun noch vergrößerten, denn die beiden verbleibenden Tasks (Feuerwehr und Ausgabe) mussten ebenfalls noch auf den Grill-Speicher zugreifen.\\
+Zum Abschluss des zweiten Treffens fertigten wir noch eine rudimentäre textuelle Ausgabe des aktuellen Programmzustands über den VGA-Bildschirm an, um das Testen über diese zu vereinfachen. Die Zugriffe dieses zusätzlichen Tasks auf den Grill verursachten entgegen unserer Erwartungen keine größeren Probleme im Scheduling. Für den Zeitraum bis zum nächsten Treffen verteilten wir die theoretischen Ausarbeitung der grafischen Ausarbeitung und die Überarbeitung des bisher produzierten Codes.
 
 \subsection{Drittes Treffen - 15.9.}
 
+Durch den guten Fortschritt in den ersten beiden Treffen, war für das letzte nur noch die Implementierung des Feuerwehr-Tasks und der grafische Ausgabe geplant, zwei verhältnismäßig kurze Aufgabenteile. Beginnen taten wir jedoch mit etwas ungeplantem.\\
+Durch die Überarbeitung des bisherigen Codes fiel ein Speicherzugriffsfehler auf, der durch eine ungenügende Absicherung des Grill-Speichers theoretisch eintreten könnte. Wir mussten uns nun entscheiden zwischen einer Absicherung durch noch eine zusätzliche Semaphore oder einer Nachrichtenbox, mit der wir uns bisher nur rudimentär auseinander setzten. Wir entschieden uns für die Nachrichtenbox und versuchten uns die korrekte Verwendung aus den gegebenen User-Manuals anzueignen. Hierbei stießen wir nach vielfachem Ausprobieren auf Fehler in den User-Manuals, die uns an diesem letzten Tag viel Zeit kosteten.\\
+
+Nach der erfolgreichen Umstellung des Kommunikationsdienstes auf die Nachrichtenbox konnten wir dann endlich mit der Implementierung der verbleibenden Tasks fortfahren.\\
+Die Erweiterung der grafischen Ausgabe konnte durch vorgeschriebenen Pseudocode schnell fertiggestellt werden. Durch den geringen Umfang der Feuerwehr-Funktionalität verhielt es sich hiermit sehr ähnlich, sodass wir an diesem dritten Termin noch die Vorführung absolvieren konnte. Durch Versäumnisse bei der Bereichsüberlaufprüfung der Eingabe trat unser Programm bei der ersten Abnahme in einen unerwarteten Fehlerzustand. Da die vergessene Überprüfung eigentlich obligatorisch war, konnte die dieser Fehlers entsprechende unkompliziert behoben werden, und wir konnten bei der zweiten Vorführung das Programm erfolgreich abnehmen lassen.\\
+
+Für die Nacharbeit verblieb lediglich noch etwas Arbeit in Sachen Modularisierung des Quellcodes. Zudem hatten wir mit der Dokumentation bis zu diesem Termin noch gewartet hatten, was jedoch zu unserem Ablaufkonzept gehörte.
+
+\subsection{Nacharbeiten}
+
+Durch Nachlässigkeiten bei der Modularisierung und Kommentierung des Quellcodes, mussten wir das fertige Programm in feingranularere Module aufteilen. Dies erforderte einen erneuten Test an einem zusätzlichen Termin im Labor. Durch erneut unerwartet auftretende Komplikationen bei der Modularisierung des Programms verschob sich der geplante Termin für diesen Finalen Test um zwei Tage.
+
+\subsection{Finaler Test - 21.9.}
+
+Nach der zusätzlichen Modularisierung die nicht im Labor umgesetzt wurde, war ein finaler Test auf die vorherige korrekte Funktionalität des Programms notwendig geworden.\\
+Das Programm lief dabei nach einbinden einer fehlenden Bibliothek ohne Probleme.
+
 \section{Programmtests}
 
+Im Folgenden sind Tests dargestellt, die während des gesamten Entwicklungsverlauf durchgeführt wurden:
+
+\begin{array}{lll}
+	\textbf{Test nach...} & \textbf{Erwartetes Ergebnis} & \textbf{tatsächliches Ergebnis} \\ 
+	Analyse & ... & ...\\ 
+	Analyse & ... & ...\\ 
+	Analyse & ... & ...\\ 
+	Analyse & ... & ...\\ 
+	Analyse & ... & ...\\ 
+	Analyse & ... & ...\\ 
+	Analyse & ... & ...\\ 
+\end{array} 
+
+\section{Aufwandsverteilung}
+
+Die gesamte Aufwandsverteilung verhielt sich in etwa wie folgt:
+
+\begin{array}{ll}
+	\textbf{Entwicklungsphase} & \textbf{~Zeitaufwand in Stunden} \\ 
+ 	Analyse & 3 \\ 
+ 	Entwurf & 4 \\ 
+ 	Implementierung & 18 \\ 
+ 	Testen & 5 \\ 
+ 	Nacharbeiten & 5 \\ 
+ 	Dokumentation & 11
+\end{array} 
+
 \section{Bedienungsanleitung}
+
+Die Steuerung der Simulation findet komplett über eine Tastatur statt, die an das DE-Board angeschlossen ist. Die Belegung der Tasten mit den verschiedenen Steuerungsmöglichkeiten sind im folgenden dargestellt:\\
 
 \begin{array}{ll}
 	\textbf{Tastenbelegung} & \textbf{Funktion} \\ 
