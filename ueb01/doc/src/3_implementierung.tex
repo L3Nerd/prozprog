@@ -138,17 +138,25 @@ Das Programm lief dabei nach einbinden einer fehlenden Bibliothek ohne Probleme.
 
 \section{Programmtests}
 
-Im Folgenden sind Tests dargestellt, die während des gesamten Entwicklungsverlauf durchgeführt wurden:
+Im Folgenden werden grundsätzliche Tests dargestellt, die während des gesamten Entwicklungsverlauf durchgeführt wurden. Diese Tests dienten zusätzlich als Grundlage für Grenzwerttests bzw. Doppelaktivierungstests.
 
-\begin{array}{lll}
-	\textbf{Test nach...} & \textbf{Erwartetes Ergebnis} & \textbf{tatsächliches Ergebnis} \\
-	Analyse & ... & ...\\
-	Analyse & ... & ...\\
-	Analyse & ... & ...\\
-	Analyse & ... & ...\\
-	Analyse & ... & ...\\
-	Analyse & ... & ...\\
-	Analyse & ... & ...\\
+\begin{array}{llll}
+	\textbf{Durch...} & \textbf{getestet nach...} & \textbf{Erwartetes Ergebnis:} & \textbf{tatsächliches Ergebnis:} \\
+	Eingabe(H) & Grill befüllen & Wurst auf Grill & Wurst auf Grill \\
+	Eingabe(D) & Kühlbox befüllen & Würste in Kühlbox & Würste in Kühlbox \\
+	Eingabe(F) & F. Wasser reichen & Wurstproduktion stoppt & Wurstproduktion stoppt \\
+	Eingabe(G) & G. Wasser reichen & keine Wurstkontrolle & keine Wurstkontrolle \\
+	Eingabe(V) & F. Wasser entziehen & keine Wurstproduktion & keine Wurstproduktion \\
+	Eingabe(B) & G. Wasser entziehen & Wurstkontrolle startet & Wurstkontrolle startet \\
+	Eingabe(+) & Temperatur + & Temperatur steigt & Temperatur steigt \\
+	Eingabe(-) & Temperatur - & Temperatur sinkt & Temperatur sinkt \\
+	
+	Timer(60s) & Kühlbox befüllen & Würste in Kühlbox & Würste in Kühlbox \\
+	Timer(1s) & Wurstkontrolle & Drehen bei +80 & Drehen bei +80 \\
+	Timer(60s) & Feuerwehr & Grill kontrolliert & Grill kontrolliert \\
+	Timer(1s) & Physik & Wurst bräunen & Wurst bräunen \\
+	
+	Grenzwert(30) & Wurstproduktion & Produktion stoppt & Produktion stoppt \\
 \end{array}
 
 \section{Aufwandsverteilung}
