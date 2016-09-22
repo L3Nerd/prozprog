@@ -140,7 +140,7 @@ Das Programm lief dabei nach einbinden einer fehlenden Bibliothek ohne Probleme.
 
 Im Folgenden werden grundsätzliche Tests dargestellt, die während des gesamten Entwicklungsverlauf durchgeführt wurden. Diese Tests dienten zusätzlich als Grundlage für Grenzwerttests bzw. Doppelaktivierungstests.
 
-\begin{array}{llll}
+\begin{tabular}{llll}
 	\textbf{Durch...} & \textbf{getestet nach...} & \textbf{Erwartetes Ergebnis:} & \textbf{tatsächliches Ergebnis:} \\
 	Eingabe(H) & Grill befüllen & Wurst auf Grill & Wurst auf Grill \\
 	Eingabe(D) & Kühlbox befüllen & Würste in Kühlbox & Würste in Kühlbox \\
@@ -150,20 +150,20 @@ Im Folgenden werden grundsätzliche Tests dargestellt, die während des gesamten
 	Eingabe(B) & G. Wasser entziehen & Wurstkontrolle startet & Wurstkontrolle startet \\
 	Eingabe(+) & Temperatur + & Temperatur steigt & Temperatur steigt \\
 	Eingabe(-) & Temperatur - & Temperatur sinkt & Temperatur sinkt \\
-	
+
 	Timer(60s) & Kühlbox befüllen & Würste in Kühlbox & Würste in Kühlbox \\
 	Timer(1s) & Wurstkontrolle & Drehen bei +80 & Drehen bei +80 \\
 	Timer(60s) & Feuerwehr & Grill kontrolliert & Grill kontrolliert \\
 	Timer(1s) & Physik & Wurst bräunen & Wurst bräunen \\
-	
+
 	Grenzwert(30) & Wurstproduktion & Produktion stoppt & Produktion stoppt \\
-\end{array}
+\end{tabular}
 
 \section{Aufwandsverteilung}
 
 Die gesamte Aufwandsverteilung verhielt sich in etwa wie folgt:
 
-\begin{array}{ll}
+\begin{tabular}{ll}
 	\textbf{Entwicklungsphase} & \textbf{~Zeitaufwand in Stunden} \\
  	Analyse & 3 \\
  	Entwurf & 4 \\
@@ -171,13 +171,13 @@ Die gesamte Aufwandsverteilung verhielt sich in etwa wie folgt:
  	Testen & 5 \\
  	Nacharbeiten & 5 \\
  	Dokumentation & 11
-\end{array}
+\end{tabular}
 
 \section{Bedienungsanleitung}
 
 Die Steuerung der Simulation findet komplett über eine Tastatur statt, die an das DE-Board angeschlossen ist. Die Belegung der Tasten mit den verschiedenen Steuerungsmöglichkeiten sind im folgenden dargestellt:\\
 
-\begin{array}{ll}
+\begin{tabular}{ll}
 	\textbf{Tastenbelegung} & \textbf{Funktion} \\
 	d/D & Fleischer zur Produktion veranlassen \\
 	h/H & Grillmeister Wurst auflegen lassen \\
@@ -187,4 +187,4 @@ Die Steuerung der Simulation findet komplett über eine Tastatur statt, die an d
 	b/B & Grillmeister Mineralwasser entziehen \\
 	+ & Grilltemperatur erhoehen \\
 	- & Grilltemperatur reduzieren
-\end{array}
+\end{tabular}
